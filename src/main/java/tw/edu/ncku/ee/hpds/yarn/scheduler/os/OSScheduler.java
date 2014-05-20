@@ -3,6 +3,10 @@ package tw.edu.ncku.ee.hpds.yarn.scheduler.os;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.hadoop.classification.InterfaceAudience.LimitedPrivate;
+import org.apache.hadoop.classification.InterfaceStability.Evolving;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.security.UserGroupInformation;
 import org.apache.hadoop.yarn.api.records.ApplicationAttemptId;
@@ -22,8 +26,13 @@ import org.apache.hadoop.yarn.server.resourcemanager.scheduler.SchedulerAppRepor
 import org.apache.hadoop.yarn.server.resourcemanager.scheduler.SchedulerNodeReport;
 import org.apache.hadoop.yarn.server.resourcemanager.scheduler.event.SchedulerEvent;
 
+@LimitedPrivate("yarn")
+@Evolving
+@SuppressWarnings("unchecked")
 public class OSScheduler implements ResourceScheduler {
 
+  private static final Log LOG = LogFactory.getLog(OSScheduler.class);
+  
 	public Allocation allocate(ApplicationAttemptId arg0,
 			List<ResourceRequest> arg1, List<ContainerId> arg2,
 			List<String> arg3, List<String> arg4) {
